@@ -5,21 +5,24 @@ on:
   
 permissions:
   issues: write
+  contents: write
 
 jobs:
   create-issue:
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
+
     steps:
-    - name: Create issue
-      uses: actions/github-script@main
+    - name: Create repository dispatch event
+      uses: actions/github-script@v7
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
-          return await github.rest.issues.create({
+          return await github.rest.repos.createDispatchEvent({
             owner: 'im-github-training',
-            repo: 'test-repo',
-            title: 'Issue title',
-            body: 'Issue body'
+            repo: 'im-github-training.github.io',
+            event_type: 'my-event',
+            client_payload: {
+              key1: 'value1',
+              key2: 'value2'
+            }
           });
+            
