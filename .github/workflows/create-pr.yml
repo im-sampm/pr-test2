@@ -13,16 +13,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Create repository dispatch event
-      uses: actions/github-script@main
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v6
       with:
-        script: |
-          return await github.rest.pulls.create({
-            owner: 'im-github-training',
-            repo: 'pr-test',
-            base: 'my-first-branch',
-            head: 'main',
-            title: 'Test',
-            body: 'Test'
-          });
+        token: ${{ secrets.GITHUB_TOKEN }} # or a repo scoped Personal Access Token (PAT) for more permissions
+        base: "main" # The base branch in the parent repository
+        push-to-fork: "im-github-training/pr-test" # Specify the fork repository
+        title: "Your Pull Request Title"
+        body: "The body of your pull request."
+
+
             
