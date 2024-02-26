@@ -12,10 +12,9 @@ jobs:
       uses: actions/github-script@v7
       with:
         script: |
-          const issue = {
-            owner: 'im-github-training'
-            repo: 'im-github-training.github.io', // replace with the repository name
-            title: 'Issue title', // replace with the issue title
-            body: 'Issue body' // replace with the issue body
-          };
-          github.rest.issues.create(issue);
+          return await github.rest.issues.create({
+            owner: 'im-github-training',
+            repo: 'im-github-training.github.io',
+            title: 'Issue title',
+            body: 'Issue body'
+          });
