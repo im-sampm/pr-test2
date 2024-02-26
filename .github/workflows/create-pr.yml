@@ -14,14 +14,14 @@ jobs:
 
     steps:
     - name: Create repository dispatch event
-      uses: actions/github-script@v7
+      uses: actions/github-script@main
       with:
         script: |
           return await github.rest.pulls.create({
             owner: 'im-github-training',
             repo: 'pr-test',
-            head: 'my-first-branch',
-            base: 'main',
+            base: 'my-first-branch',
+            head: 'main',
             title: 'Test',
             body: 'Test'
           });
