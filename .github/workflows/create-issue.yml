@@ -17,7 +17,7 @@ jobs:
         script: |
           return await github.rest.issues.create({
             owner: 'im-github-training',
-            repo: 'im-github-training.github.io',
+            repo: 'test-repo',
             title: 'Issue title',
             body: 'Issue body'
           });
