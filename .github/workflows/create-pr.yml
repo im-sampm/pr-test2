@@ -1,4 +1,4 @@
-name: Create Issue
+name: Create PR
 
 on:
   workflow_dispatch:
@@ -6,23 +6,24 @@ on:
 permissions:
   issues: write
   contents: write
+  pull-requests: write
 
 jobs:
-  create-issue:
+  create-pr:
     runs-on: ubuntu-latest
 
     steps:
     - name: Create repository dispatch event
       uses: actions/github-script@v7
       with:
+        github-token: ${{ secrets.TEST_SECRET }}
         script: |
-          return await github.rest.repos.createDispatchEvent({
+          return await github.rest.pulls.create({
             owner: 'im-github-training',
-            repo: 'im-github-training.github.io',
-            event_type: 'my-event',
-            client_payload: {
-              key1: 'value1',
-              key2: 'value2'
-            }
+            repo: 'pr-test',
+            head: 'my-first-branch',
+            base: 'main',
+            title: 'Test',
+            body: 'Test'
           });
             
