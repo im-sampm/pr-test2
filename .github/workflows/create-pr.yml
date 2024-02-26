@@ -16,7 +16,6 @@ jobs:
     - name: Create repository dispatch event
       uses: actions/github-script@v7
       with:
-        github-token: ${{ secrets.TEST_SECRET }}
         script: |
           return await github.rest.pulls.create({
             owner: 'im-github-training',
